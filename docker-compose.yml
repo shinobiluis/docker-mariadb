@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+
+  db:
+    container_name: base_personal
+    image: mariadb
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_USER: luis
+      MYSQL_PASSWORD: 123456789
+
+    volumes:
+      # Montamos un volumen para Mariadb para no perder los datos de bd
+      - $PWD/volumen:/var/lib/mysql
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
